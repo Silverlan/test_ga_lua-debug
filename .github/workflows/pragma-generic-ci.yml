@@ -33,6 +33,7 @@ jobs:
         shell: python
         run: |
           import subprocess
+          import os
 
           tmp_env = os.environ.copy()
           curdir = os.getcwd()
