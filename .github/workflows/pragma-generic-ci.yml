@@ -44,6 +44,7 @@ jobs:
           git submodule init
           git submodule update
 
+          PATH=$PATH:$(pwd)/luamake
           luamake lua compile/download_deps.lua
           luamake
           
