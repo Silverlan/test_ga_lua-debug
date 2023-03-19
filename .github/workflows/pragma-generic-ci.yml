@@ -51,6 +51,7 @@ jobs:
           subprocess.run(["git","submodule","update"],shell=True,check=True,env=tmp_env)
 
           tmp_env["PATH"] = luamake_root +":" + tmp_env["PATH"]
+          os.environ["PATH"] += os.pathsep + luamake_root
           subprocess.run(["luamake","lua","compile/download_deps.lua"],shell=True,check=True,env=tmp_env)
           subprocess.run(["luamake"],shell=True,check=True,env=tmp_env)
 
