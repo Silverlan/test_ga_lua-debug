@@ -30,22 +30,36 @@ jobs:
 
       - name: Build lua-debug
         id: setup
-        shell: pwsh
+        shell: python
         run: |
-          git clone https://github.com/actboy168/luamake
-          pushd luamake
-          git submodule init
-          git submodule update
-          ./compile/install.bat
-          $currentDir = Get-Location
-          $env:Path += ';' + $currentDir
-          popd
+          subprocess.run(["git","clone","https://github.com/actboy168/luamake"],shell=True,check=True)
+          subprocess.run(["pushd","luamake"],shell=True,check=True)
+          subprocess.run(["git","submodule","init"],shell=True,check=True)
+          subprocess.run(["git","submodule","update"],shell=True,check=True)
+          subprocess.run(["./compile/install.bat"],shell=True,check=True)
+          subprocess.run(["popd"],shell=True,check=True)
 
-          git clone https://github.com/actboy168/lua-debug
-          cd lua-debug
-          git submodule init
-          git submodule update
+          subprocess.run(["git","clone","https://github.com/actboy168/lua-debug"],shell=True,check=True)
+          subprocess.run(["cd","lua-debug"],shell=True,check=True)
+          subprocess.run(["git","submodule","init"],shell=True,check=True)
+          subprocess.run(["git","submodule","update"],shell=True,check=True)
+          subprocess.run(["luamake","lua","compile/download_deps.lua"],shell=True,check=True)
+          subprocess.run(["luamake"],shell=True,check=True)
 
-          luamake lua compile/download_deps.lua
-          luamake
+          #git clone https://github.com/actboy168/luamake
+          #pushd luamake
+          #git submodule init
+          #git submodule update
+          #./compile/install.bat
+          #$currentDir = Get-Location
+          #$env:Path += ';' + $currentDir
+          #popd
+
+          #git clone https://github.com/actboy168/lua-debug
+          #cd lua-debug
+          #git submodule init
+          #git submodule update
+
+          #luamake lua compile/download_deps.lua
+          #luamake
           
