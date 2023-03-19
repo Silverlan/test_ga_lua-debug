@@ -37,7 +37,7 @@ jobs:
           subprocess.run(["pushd","luamake"],shell=True,check=True)
           subprocess.run(["git","submodule","init"],shell=True,check=True)
           subprocess.run(["git","submodule","update"],shell=True,check=True)
-          subprocess.run(["./compile/install.bat"],shell=True,check=True)
+          subprocess.run(["compile/install.bat"],shell=True,check=True)
           subprocess.run(["popd"],shell=True,check=True)
 
           subprocess.run(["git","clone","https://github.com/actboy168/lua-debug"],shell=True,check=True)
