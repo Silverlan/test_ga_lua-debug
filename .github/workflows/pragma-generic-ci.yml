@@ -30,7 +30,7 @@ jobs:
 
       - name: Build lua-debug
         id: setup
-        shell: python
+        shell: bash
         run: |
           git clone https://github.com/actboy168/luamake
           pushd luamake
