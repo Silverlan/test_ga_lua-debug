@@ -32,6 +32,7 @@ jobs:
         id: setup
         shell: python
         run: |
+          import subprocess
           subprocess.run(["git","clone","https://github.com/actboy168/luamake"],shell=True,check=True)
           subprocess.run(["pushd","luamake"],shell=True,check=True)
           subprocess.run(["git","submodule","init"],shell=True,check=True)
