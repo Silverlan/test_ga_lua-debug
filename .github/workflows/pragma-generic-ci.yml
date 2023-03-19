@@ -33,19 +33,23 @@ jobs:
         shell: python
         run: |
           import subprocess
-          subprocess.run(["git","clone","https://github.com/actboy168/luamake"],shell=True,check=True)
-          subprocess.run(["pushd","luamake"],shell=True,check=True)
-          subprocess.run(["git","submodule","init"],shell=True,check=True)
-          subprocess.run(["git","submodule","update"],shell=True,check=True)
-          subprocess.run(["compile/install.bat"],shell=True,check=True)
-          subprocess.run(["popd"],shell=True,check=True)
 
-          subprocess.run(["git","clone","https://github.com/actboy168/lua-debug"],shell=True,check=True)
-          subprocess.run(["cd","lua-debug"],shell=True,check=True)
-          subprocess.run(["git","submodule","init"],shell=True,check=True)
-          subprocess.run(["git","submodule","update"],shell=True,check=True)
-          subprocess.run(["luamake","lua","compile/download_deps.lua"],shell=True,check=True)
-          subprocess.run(["luamake"],shell=True,check=True)
+          tmp_env = os.environ.copy()
+          curdir = os.getcwd()
+          subprocess.run(["git","clone","https://github.com/actboy168/luamake"],shell=True,check=True,env=tmp_env)
+          luamake_root = os.getcwd() +"/luamake"
+          os.chdir(luamake_root)
+          subprocess.run(["git","submodule","init"],shell=True,check=True,env=tmp_env)
+          subprocess.run(["git","submodule","update"],shell=True,check=True,env=tmp_env)
+          subprocess.run(["compile/install.bat"],shell=True,check=True,env=tmp_env)
+
+          os.chdir(curdir)
+          subprocess.run(["git","clone","https://github.com/actboy168/lua-debug"],shell=True,check=True,env=tmp_env)
+          subprocess.run(["cd","lua-debug"],shell=True,check=True,env=tmp_env)
+          subprocess.run(["git","submodule","init"],shell=True,check=True,env=tmp_env)
+          subprocess.run(["git","submodule","update"],shell=True,check=True,env=tmp_env)
+          subprocess.run(["luamake","lua","compile/download_deps.lua"],shell=True,check=True,env=tmp_env)
+          subprocess.run(["luamake"],shell=True,check=True,env=tmp_env)
 
           #git clone https://github.com/actboy168/luamake
           #pushd luamake
