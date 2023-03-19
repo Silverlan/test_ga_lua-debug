@@ -42,7 +42,7 @@ jobs:
           os.chdir(luamake_root)
           subprocess.run(["git","submodule","init"],shell=True,check=True,env=tmp_env)
           subprocess.run(["git","submodule","update"],shell=True,check=True,env=tmp_env)
-          subprocess.run(["compile/install.bat"],shell=True,check=True,env=tmp_env)
+          subprocess.run([luamake_root +"/compile/install.bat"],shell=True,check=True,env=tmp_env)
 
           os.chdir(curdir)
           subprocess.run(["git","clone","https://github.com/actboy168/lua-debug"],shell=True,check=True,env=tmp_env)
