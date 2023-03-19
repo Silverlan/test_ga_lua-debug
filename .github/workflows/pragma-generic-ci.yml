@@ -49,8 +49,10 @@ jobs:
           subprocess.run(["cd","lua-debug"],shell=True,check=True,env=tmp_env)
           subprocess.run(["git","submodule","init"],shell=True,check=True,env=tmp_env)
           subprocess.run(["git","submodule","update"],shell=True,check=True,env=tmp_env)
-          subprocess.run([luamake_root +"/luamake","lua","compile/download_deps.lua"],shell=True,check=True,env=tmp_env)
-          subprocess.run([luamake_root +"/luamake"],shell=True,check=True,env=tmp_env)
+
+          tmp_env["PATH"] = luamake_root +":" + tmp_env["PATH"]
+          subprocess.run(["luamake","lua","compile/download_deps.lua"],shell=True,check=True,env=tmp_env)
+          subprocess.run(["luamake"],shell=True,check=True,env=tmp_env)
 
           #git clone https://github.com/actboy168/luamake
           #pushd luamake
