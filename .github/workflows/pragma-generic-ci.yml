@@ -43,15 +43,15 @@ jobs:
           subprocess.run(["git","submodule","init"],shell=True,check=True,env=tmp_env)
           subprocess.run(["git","submodule","update"],shell=True,check=True,env=tmp_env)
           subprocess.run([luamake_root +"/compile/install.bat"],shell=True,check=True,env=tmp_env)
+          tmp_env["PATH"] = luamake_root +";" + tmp_env["PATH"]
 
           os.chdir(curdir)
           subprocess.run(["git","clone","https://github.com/actboy168/lua-debug"],shell=True,check=True,env=tmp_env)
-          subprocess.run(["cd","lua-debug"],shell=True,check=True,env=tmp_env)
+          luadebug_root = os.getcwd() +"/lua-debug"
+          os.chdir(luadebug_root)
           subprocess.run(["git","submodule","init"],shell=True,check=True,env=tmp_env)
           subprocess.run(["git","submodule","update"],shell=True,check=True,env=tmp_env)
 
-          tmp_env["PATH"] = luamake_root +";" + tmp_env["PATH"]
-          #os.environ["PATH"] += os.pathsep + luamake_root
           subprocess.run(["luamake","lua","compile/download_deps.lua"],shell=True,check=True,env=tmp_env)
           subprocess.run(["luamake"],shell=True,check=True,env=tmp_env)
 
